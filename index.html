@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>🔧Flexbox 调试</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Flexbox 调试</h1>
+    <p class="desc">Flexbox（全称 Flexible Box）布局，也叫Flex布局，意为“弹性布局”</p>
+  </div>
+  <div id="code-info" class="code-info">
+    <div>.box {</div>
+    <div class="code-item">display: flex;</div>
+    <div class="code-item">
+      <span class="v1">-</span>: <span class="v2">-</span>;
+    </div>
+    <div>}</div>
+  </div>
+  <div class="container">
+    <div class="row-item">
+      <ul class="left-nav" id="nav-list">
+        <h2>容器属性</h2>
+      </ul>
+      <ul class="left-nav">
+        <h2>项目属性</h2>
+        <li>order</li>
+        <li>flex-grow</li>
+        <li>flex-shrink</li>
+        <li>flex-basis</li>
+        <li>flex</li>
+      </ul>
+    </div>
+    <div class="row-item">
+      <div class="nav-content">
+        <p id="nav-info">
+          <span class="nav-info-title">-</span>
+          <span class="nav-info-desc">-</span>
+        </p>
+        <ul id="nav-child-list" class="nav-child-list">
+        </ul>
+        <div class="code-desc" id="nav-child-info">-</div>
+        <div class="box-warp">
+          <div class="box-mask">
+            <div class="main-axis"></div>
+            <div class="cross-axis"></div>
+          </div>
+          <div class="box"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+<!-- 
+  <h2>项目属性</h2>
+  <hr />
+
+  <div>order: 定义了项目的排列顺序，默认值为 0，数值越小，排列越靠前</div>
+  <pre>
+    .item {
+      order: &lt;integer&gt;;
+    }
+  </pre>
+  <div>flex-grow: 定义了项目的放大比例，默认为 0，也就是即使存在剩余空间，也不会放大</div>
+  <div>如果所有项目的 flex-grow 都为 1，则所有项目平分剩余空间；如果其中某个项目的 flex-grow 为 2，其余项目的 flex-grow 为 1，则前者占据的剩余空间比其他项目多一倍。</div>
+  <pre>
+    .item {
+      flex-grow: &lt;number&gt;;
+    }
+  </pre>
+  <div>
+    flex-shrink: 定义了项目的缩小比例，默认为 1，即当空间不足时，项目会自动缩小, 负值对该属性无效;
+    <p>
+      如果所有项目的 flex-shrink 都为 1，当空间不足时，所有项目都将等比缩小；如果其中一个项目的 flex-shrink 为 0，其余都为 1，当空间不足时，flex-shrink 为 0 的不缩小。
+    </p>
+  </div>
+  <pre>
+    .item {
+      flex-shrink: &lt;number&gt;;
+    }
+  </pre>
+  <div>
+    flex-basis: 定义了在分配多余的空间之前，项目占据的主轴空间，默认值为 auto，即项目原来的大小。浏览器会根据这个属性来计算主轴是否有多余的空间。
+    <p>flex-basis 的设置跟 width 或 height 一样，可以是像素，也可以是百分比。设置了 flex-basis 之后，它的优先级比 width 或 height 高。</p>
+  </div>
+  <pre>
+    .item {
+      flex-basis: &lt;number&gt; | auto;
+    }
+  </pre>
+
+  <div>flex: 是 flex-grow、flex-shrink、flex-basis 的缩写，默认值是 0 1 auto，后两个属性可选。</div>
+  <div>align-self: 用来定义单个项目与其他项目不一样的对齐方式，可以覆盖 align-items 属性。默认属性值是 auto，即继承父项目的 align-items 属性值。当没有父项目时，它的表现等同于 stretch。</div>
+
+   -->
+
+
+
+  <script crossorigin="anonymous" integrity="sha384-rY/jv8mMhqDabXSo+UCggqKtdmBfd3qC2/KvyTDNQ6PcUJXaxK1tMepoQda4g5vB"
+    src="https://lib.baomitu.com/jquery/2.2.4/jquery.min.js">
+  </script>
+
+  <script>
+    var navLists = [
+      {
+        id: 0,
+        title: 'flex-direction',
+        desc: '定义主轴方向',
+        children: [
+          {
+            id: 1,
+            title: 'row',
+            desc: '主轴在水平方向，起点在左侧，默认值',
+          },
+          {
+            id: 2,
+            title: 'row-reverse',
+            desc: '主轴在水平方向，起点在右侧',
+          },
+          {
+            id: 3,
+            title: 'column',
+            desc: '主轴在垂直方向，起点在上边',
+          },
+          {
+            id: 4,
+            title: 'column-reverse',
+            desc: '主轴在垂直方向，起点在下边',
+          },
+        ]
+      },
+      {
+        id: 1,
+        title: 'flex-wrap',
+        desc: '定义如何换行',
+        children: [
+          {
+            id: 1,
+            title: 'nowrap',
+            desc: '不换行， (默认值）',
+          },
+          {
+            id: 2,
+            title: 'wrap',
+            desc: '换行，第一行在上边',
+          },
+          {
+            id: 3,
+            title: 'wrap-reverse',
+            desc: '换行，第一行在下边',
+          },
+        ]
+      },
+      {
+        id: 2,
+        title: 'justify-content',
+        desc: '定义了项目主轴上的对齐方式',
+        children: [
+          {
+            id: 1,
+            title: 'flex-start',
+            desc: '与主轴的起点对齐（默认值）',
+          },
+          {
+            id: 2,
+            title: 'flex-end',
+            desc: '与主轴的终点对齐',
+          },
+          {
+            id: 3,
+            title: 'center',
+            desc: '项目居中对齐',
+          },
+          {
+            id: 4,
+            title: 'space-between',
+            desc: '两端对齐，项目之间的距离都相等',
+          },
+          {
+            id: 5,
+            title: 'space-around',
+            desc: '每个项目的两侧间隔相等，项目之间的间隔是项目与边框之间间隔的两倍',
+          },
+        ]
+      },
+      {
+        id: 3,
+        title: 'align-items',
+        desc: '定义了项目在交叉轴上如何对齐',
+        children: [
+          {
+            id: 1,
+            title: 'stretch',
+            desc: '如果项目未设置高度或者为 auto，项目将占满整个容器的高度（默认值）',
+          },
+          {
+            id: 2,
+            title: 'flex-start',
+            desc: '与交叉轴的起点对齐',
+          },
+          {
+            id: 3,
+            title: 'flex-end',
+            desc: '与交叉轴的终点对齐',
+          },
+          {
+            id: 4,
+            title: 'center',
+            desc: '居中对齐',
+          },
+          {
+            id: 5,
+            title: 'baseline',
+            desc: '项目第一行文字的基线对齐',
+          },
+        ]
+      },
+      {
+        id: 4,
+        title: 'align-content',
+        desc: '定义了多行在垂直方向的对齐方式（项目排列只有一行时，该属性不起作用）',
+        children: [
+          {
+            id: 1,
+            title: 'stretch',
+            desc: '如果项目未设置高度或者为 auto，项目将占满整个容器的高度（默认值）',
+          },
+          {
+            id: 2,
+            title: 'flex-start',
+            desc: '与交叉轴的起点对齐',
+          },
+          {
+            id: 3,
+            title: 'flex-end',
+            desc: '与交叉轴的终点对齐',
+          },
+          {
+            id: 4,
+            title: 'center',
+            desc: '居中对齐',
+          },
+          {
+            id: 5,
+            title: 'space-between',
+            desc: '与交叉轴两端对齐，轴线之间的距离相等',
+          },
+          {
+            id: 6,
+            title: 'space-around',
+            desc: '每根轴线两侧的间隔都相等，所以轴线与轴线之间的间隔是轴线与边框之间间隔的两倍',
+          },
+        ]
+      },
+    ];
+    
+    let navList = $('#nav-list');
+    let navChildList = $('#nav-child-list');
+    init();
+    
+    // 初始化
+    function init() {
+      initNav();
+      initNavInfo();
+      initNavChild();
+      setCodeValue();
+      setClassAttr();
+      renderItems(4);
+    }
+
+    function setCodeValue(id) {
+      let targetItem = navLists[id || 0];
+      $('#code-info .v1').text(targetItem.title);
+      $('#code-info .v1').attr('data-value', targetItem.title);
+      // 子属性值展示
+      $('#code-info .v2').text(targetItem.children[0].title);
+      $('#code-info .v2').attr('data-value', targetItem.children[0].title);
+    }
+    
+    function initNav() {
+      let arr = '';
+      for (let i = 0; i < navLists.length; i++) {
+        let getList = navLists[i];
+        arr += `<li data-value=${getList.title} data-id=${getList.id}>${getList.title}</li>`
+      }
+      navList.append(arr);
+      initCurrentNav(1);
+    }
+
+    // 初始化属性children列表
+    function initNavChild(id) {
+      navChildList.empty();
+      const navItem = navLists[id || 0]
+      const navChildData = navItem.children;
+      let arr = '';
+      for (let i = 0; i < navChildData.length; i++) {
+        arr += `<li data-parent=${navItem.title} data-value=${navChildData[i].title} data-desc=${navChildData[i].desc}>${navChildData[i].title}</li>`
+      }
+      // 添加子列表
+      navChildList.append(arr);
+      // 父属性信息展示
+      initNavInfo(navItem.title, navItem.desc);
+      // 子属性信息展示
+      changeChildNavInfo(navChildData[0].desc);
+      initCurrentNav(2);
+    }
+
+    // 初始化默认class
+    function initCurrentNav(type) {
+      if (type === 1) { // 左侧nav设置
+        let navLis = navList.find('li');
+        $(navLis[0]).addClass('attr-current-tag');
+      } else if (type === 2) { // 右侧nav列表设置
+        let navChildLis = navChildList.find('li');
+        $(navChildLis[0]).addClass('attr-current-tag');
+      }
+    }
+    // 初始化属性信息
+    function initNavInfo(title, desc) {
+      $('#nav-info .nav-info-title').text((title || navLists[0].title) + '：');
+      $('#nav-info .nav-info-desc').text(desc || navLists[0].desc);
+    }
+
+    navList.click((event) => {
+      handelChange(event, 1);
+      leftNavChange(event);
+    })
+
+    navChildList.click((event) => {
+      handelChange(event, 2);
+    })
+
+    function handelChange(event, type) {
+      let $target = $(event.target);
+      let id = $target.data('id');
+      $target.siblings('li').removeClass('attr-current-tag');
+      if ($target.is("li")) {
+        $target.addClass("attr-current-tag");
+        if (type === 2) { // 右侧子列表选择设置
+          changeChildNavInfo($target.data('desc'));
+          $('#code-info .v2').text($target.data('value'));
+        } else {
+          setCodeValue(id);
+          if (id === 1) {
+            renderItems(8);
+          } else {
+            renderItems(4);
+          }
+        }
+        setClassAttr();
+      }
+    }
+
+    function renderItems(num) {
+      $('.box').empty();
+      let itemEle = '';
+      for (let i = 0; i < num; i++) {
+        itemEle += '<div class="item">'+(i+1)+'</div>';
+      }
+      $('.box').append(itemEle);
+    }
+
+    function leftNavChange(event) {
+      let $target = $(event.target);
+      let id = $target.data('id');
+      initNavChild(id);
+    }
+
+    // 设置盒子类型
+    function setClassAttr() {
+      let codeTarget = $('#code-info');
+      let k = codeTarget.find('.v1').text();
+      let v = codeTarget.find('.v2').text();
+      let styleObj = {[k]: v};
+      $(".box").removeAttr("style");
+      $('.box').css(styleObj);
+    }
+    // 改变属性信息
+    function changeChildNavInfo(text) {
+      $('#nav-child-info').text(text);
+    }
+  </script>
+</body>
+</html>
