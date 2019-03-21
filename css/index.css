@@ -1,0 +1,164 @@
+html, body {
+  height: 100%;
+  height: 100%;
+}
+.main-warp {
+  height: 100%;
+  height: 100%;
+  position: relative;
+  background: #f5f6fa;
+}
+
+.info-content {
+  position: fixed;
+  height: 100%;
+  width: 360px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #12131d;
+  top: 0;
+  left: 0;
+  color: #eee;
+}
+.dashed-arrow, .dashed-arrow1 {
+  position: relative;
+  opacity: .7;
+}
+.dashed-arrow::after, .dashed-arrow1::after, .dashed-arrow::before, .dashed-arrow1::before {
+  content: '';
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  border-style: dashed;
+}
+.dashed-arrow::after, .dashed-arrow::before {
+  border-color: #ba00da;
+  transform: rotate(45deg);
+}
+.dashed-arrow::after {
+  right: 2px;
+  top: -6px;
+  border-width: 2px 0 0 0;
+}
+.dashed-arrow::before {
+  left: 2px;
+  top: -6px;
+  border-width: 0 0 0 2px;
+}
+.dashed-arrow1::after, .dashed-arrow1::before {
+  transform: rotate(-45deg);
+  border-color: #00cc08;
+}
+.dashed-arrow1::after {
+  left: -7px;
+  bottom: 1px;
+  border-width: 0 0 2px 0;
+}
+.dashed-arrow1::before {
+  left: -8px;
+  top: 2px;
+  border-width: 0 2px 0 0;
+}
+
+/* .display-item {
+  transition: all .5s linear;
+} */
+
+.container-warp {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 360px;
+  overflow-y: scroll;
+}
+
+.box-container {
+  width: 600px;
+  height: 350px;
+  margin: 200px 200px;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 4px 6px 8px #d8d9e0;
+}
+
+.box-container .main-container {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 99;
+}
+
+.box-container .main-container .item {
+  width: 120px;
+  height: 120px;
+  margin: 5px;
+  background: #efefef;
+}
+
+.box-container .main-axis,
+.box-container .cross-axis
+ {
+  position: absolute;
+  text-align: left;
+  z-index: 100;
+}
+
+.box-container .main-axis {
+  width: 100%;
+  top: 50%;
+  left: 0;
+  border-bottom: 2px dashed #ba00da;
+  color: #ba00da;
+}
+
+.box-container .cross-axis {
+  height: 100%;
+  left: 50%;
+  border-left: 2px dashed #00cc08;
+  color: #00cc08;
+  /* writing-mode: vertical-rl; */
+}
+
+.main-start, .main-end, .main-center {
+  position: absolute;
+  bottom: 0;
+}
+.main-start {
+  left: -110px;
+}
+.main-end {
+  right: -85px;
+}
+.main-center {
+  left: 100px;
+}
+
+.cross-start, .cross-end, .cross-center {
+  position: absolute;
+  width: 180px;
+  left: -10px;
+}
+.cross-start {
+  top: -30px;
+}
+.cross-end {
+  bottom: -30px;
+}
+.cross-center {
+  top: 30%;
+}
+
+/* 选择属性列表 */
+
+.attr-list {
+
+}
+.attr-nav {
+  background-color: red;
+  overflow: hidden;
+}
+.attr-nav .item {
+  float: left;
+}

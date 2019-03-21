@@ -4,108 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>🔧Flexbox 调试</title>
+  <title>🔧FLEXBOX-TOOL</title>
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <div class="header">
-    <h1>Flexbox 调试</h1>
-    <p class="desc">Flexbox（全称 Flexible Box）布局，也叫Flex布局，意为“弹性布局”</p>
-  </div>
-  <div id="code-info" class="code-info">
-    <div>.box {</div>
-    <div class="code-item">display: flex;</div>
-    <div class="code-item">
-      <span class="v1">-</span>: <span class="v2">-</span>;
-    </div>
-    <div>}</div>
-  </div>
-  <div class="container">
-    <div class="row-item">
-      <ul class="left-nav" id="nav-list">
-        <h2>容器属性</h2>
-      </ul>
-      <ul class="left-nav">
-        <h2>项目属性</h2>
-        <li>order</li>
-        <li>flex-grow</li>
-        <li>flex-shrink</li>
-        <li>flex-basis</li>
-        <li>flex</li>
-      </ul>
-    </div>
-    <div class="row-item">
-      <div class="nav-content">
-        <p id="nav-info">
-          <span class="nav-info-title">-</span>
-          <span class="nav-info-desc">-</span>
-        </p>
-        <ul id="nav-child-list" class="nav-child-list">
-        </ul>
-        <div class="code-desc" id="nav-child-info">-</div>
-        <div class="box-warp">
-          <div class="box-mask">
-            <div class="main-axis"></div>
-            <div class="cross-axis"></div>
-          </div>
-          <div class="box"></div>
+  <div class="main-warp">
+    <!-- <div class="info-content">
+      <h2>Flexbox 概念</h2>
+      <p>Flex布局是一整个模块，其中父元素称为 flex container（Flex 容器）；所有子元素称为 flex item（Flex 项目）；</p>
+      <p>Flex布局存在两条概念轴，水平的主轴（main axis）和垂直的交叉轴（cross axis）,默认的主轴方向也是水平的，交叉轴是垂直的；</p>
+      <p>主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；</p>
+      <p>交叉轴的开始位置叫做cross start，结束位置叫做cross end；</p>
+      <p>子元素在主轴方向上的大小称为 main size，在交叉轴方向上的大小称为 cross size。</p>
+    </div> -->
+    <div class="container-warp">
+      <div id="attr-List" class="attr-list">
+        
+      </div>
+      <div class="box-container">
+        <div class="dashed-arrow main-axis">
+          <span class="main-start">main start</span>
+          <span class="main-center">main axis(主轴)</span>
+          <span class="main-end">main end</span>
+        </div>
+        <div class="dashed-arrow1 cross-axis">
+          <span class="cross-start">cross start</span>
+          <span class="cross-center">cross axis(交叉轴)</span>
+          <span class="cross-end">cross end</span>
+        </div>
+        <div class="main-container">
         </div>
       </div>
     </div>
   </div>
-  
-  
-
-<!-- 
-  <h2>项目属性</h2>
-  <hr />
-
-  <div>order: 定义了项目的排列顺序，默认值为 0，数值越小，排列越靠前</div>
-  <pre>
-    .item {
-      order: &lt;integer&gt;;
-    }
-  </pre>
-  <div>flex-grow: 定义了项目的放大比例，默认为 0，也就是即使存在剩余空间，也不会放大</div>
-  <div>如果所有项目的 flex-grow 都为 1，则所有项目平分剩余空间；如果其中某个项目的 flex-grow 为 2，其余项目的 flex-grow 为 1，则前者占据的剩余空间比其他项目多一倍。</div>
-  <pre>
-    .item {
-      flex-grow: &lt;number&gt;;
-    }
-  </pre>
-  <div>
-    flex-shrink: 定义了项目的缩小比例，默认为 1，即当空间不足时，项目会自动缩小, 负值对该属性无效;
-    <p>
-      如果所有项目的 flex-shrink 都为 1，当空间不足时，所有项目都将等比缩小；如果其中一个项目的 flex-shrink 为 0，其余都为 1，当空间不足时，flex-shrink 为 0 的不缩小。
-    </p>
-  </div>
-  <pre>
-    .item {
-      flex-shrink: &lt;number&gt;;
-    }
-  </pre>
-  <div>
-    flex-basis: 定义了在分配多余的空间之前，项目占据的主轴空间，默认值为 auto，即项目原来的大小。浏览器会根据这个属性来计算主轴是否有多余的空间。
-    <p>flex-basis 的设置跟 width 或 height 一样，可以是像素，也可以是百分比。设置了 flex-basis 之后，它的优先级比 width 或 height 高。</p>
-  </div>
-  <pre>
-    .item {
-      flex-basis: &lt;number&gt; | auto;
-    }
-  </pre>
-
-  <div>flex: 是 flex-grow、flex-shrink、flex-basis 的缩写，默认值是 0 1 auto，后两个属性可选。</div>
-  <div>align-self: 用来定义单个项目与其他项目不一样的对齐方式，可以覆盖 align-items 属性。默认属性值是 auto，即继承父项目的 align-items 属性值。当没有父项目时，它的表现等同于 stretch。</div>
-
-   -->
-
-
-
   <script crossorigin="anonymous" integrity="sha384-rY/jv8mMhqDabXSo+UCggqKtdmBfd3qC2/KvyTDNQ6PcUJXaxK1tMepoQda4g5vB"
-    src="https://lib.baomitu.com/jquery/2.2.4/jquery.min.js">
-  </script>
-
+    src="https://lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>
   <script>
     var navLists = [
       {
@@ -259,132 +193,50 @@
         ]
       },
     ];
-    
-    let navList = $('#nav-list');
-    let navChildList = $('#nav-child-list');
-    init();
-    
-    // 初始化
-    function init() {
-      initNav();
-      initNavInfo();
-      initNavChild();
-      setCodeValue();
-      setClassAttr();
-      renderItems(4);
-    }
 
-    function setCodeValue(id) {
-      let targetItem = navLists[id || 0];
-      $('#code-info .v1').text(targetItem.title);
-      $('#code-info .v1').attr('data-value', targetItem.title);
-      // 子属性值展示
-      $('#code-info .v2').text(targetItem.children[0].title);
-      $('#code-info .v2').attr('data-value', targetItem.children[0].title);
+    function FlexBoxTool() {
+      this.attrListEle = '';
+      this.attrId = $('.attr-list');
+      this.containerId = $('.main-container');
     }
-    
-    function initNav() {
-      let arr = '';
-      for (let i = 0; i < navLists.length; i++) {
-        let getList = navLists[i];
-        arr += `<li data-value=${getList.title} data-id=${getList.id}>${getList.title}</li>`
-      }
-      navList.append(arr);
-      initCurrentNav(1);
-    }
-
-    // 初始化属性children列表
-    function initNavChild(id) {
-      navChildList.empty();
-      const navItem = navLists[id || 0]
-      const navChildData = navItem.children;
-      let arr = '';
-      for (let i = 0; i < navChildData.length; i++) {
-        arr += `<li data-parent=${navItem.title} data-value=${navChildData[i].title} data-desc=${navChildData[i].desc}>${navChildData[i].title}</li>`
-      }
-      // 添加子列表
-      navChildList.append(arr);
-      // 父属性信息展示
-      initNavInfo(navItem.title, navItem.desc);
-      // 子属性信息展示
-      changeChildNavInfo(navChildData[0].desc);
-      initCurrentNav(2);
-    }
-
-    // 初始化默认class
-    function initCurrentNav(type) {
-      if (type === 1) { // 左侧nav设置
-        let navLis = navList.find('li');
-        $(navLis[0]).addClass('attr-current-tag');
-      } else if (type === 2) { // 右侧nav列表设置
-        let navChildLis = navChildList.find('li');
-        $(navChildLis[0]).addClass('attr-current-tag');
-      }
-    }
-    // 初始化属性信息
-    function initNavInfo(title, desc) {
-      $('#nav-info .nav-info-title').text((title || navLists[0].title) + '：');
-      $('#nav-info .nav-info-desc').text(desc || navLists[0].desc);
-    }
-
-    navList.click((event) => {
-      handelChange(event, 1);
-      leftNavChange(event);
-    })
-
-    navChildList.click((event) => {
-      handelChange(event, 2);
-    })
-
-    function handelChange(event, type) {
-      let $target = $(event.target);
-      let id = $target.data('id');
-      $target.siblings('li').removeClass('attr-current-tag');
-      if ($target.is("li")) {
-        $target.addClass("attr-current-tag");
-        if (type === 2) { // 右侧子列表选择设置
-          changeChildNavInfo($target.data('desc'));
-          $('#code-info .v2').text($target.data('value'));
-        } else {
-          setCodeValue(id);
-          if (id === 1) {
-            renderItems(8);
-          } else {
-            renderItems(4);
-          }
+    FlexBoxTool.prototype = {
+      init: function init() {
+        this.attrEle();
+        this.itemEles(3);
+      },
+      attrEle: function attrEle() {
+        for (let i = 0; i < navLists.length; i++) {
+          this.attrListEle += this.childAttrEle(navLists[i]);
         }
-        setClassAttr();
+        this.attrId.empty();
+        this.attrId.append(this.attrListEle);
+      },
+      childAttrEle: function childAttrEle(data) {
+        let childArr = data.children;
+        let childEle = '';
+        for (let i = 0; i < childArr.length; i++) {
+          childEle += `<li data-parent=${data.title} data-value=${childArr[i].title}>${childArr[i].title}</li>`
+        }
+        return `<ul class="attr-nav"><h3 data-id=${data.id} data-value=${data.title}>${data.title}</h3>${childEle}</ul>`
+      },
+      itemEles: function itemEles(num) {
+        let itemEle = '';
+        for (let i = 0; i < num; i++) {
+          itemEle += `<div class="item">${i + 1}</div>`;
+        }
+        this.containerId.empty();
+        this.containerId.append(itemEle);
       }
     }
 
-    function renderItems(num) {
-      $('.box').empty();
-      let itemEle = '';
-      for (let i = 0; i < num; i++) {
-        itemEle += '<div class="item">'+(i+1)+'</div>';
-      }
-      $('.box').append(itemEle);
-    }
 
-    function leftNavChange(event) {
-      let $target = $(event.target);
-      let id = $target.data('id');
-      initNavChild(id);
-    }
+    const flexBoxTool = new FlexBoxTool();
+    flexBoxTool.init();
 
-    // 设置盒子类型
-    function setClassAttr() {
-      let codeTarget = $('#code-info');
-      let k = codeTarget.find('.v1').text();
-      let v = codeTarget.find('.v2').text();
-      let styleObj = {[k]: v};
-      $(".box").removeAttr("style");
-      $('.box').css(styleObj);
-    }
-    // 改变属性信息
-    function changeChildNavInfo(text) {
-      $('#nav-child-info').text(text);
-    }
+
+
+
+
   </script>
 </body>
 </html>
