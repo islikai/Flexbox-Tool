@@ -10,14 +10,14 @@
 </head>
 <body>
   <div class="main-warp">
-    <!-- <div class="info-content">
-      <h2>Flexbox 概念</h2>
+    <div class="info-content">
+      <h2>Flexbox 调试工具</h2>
       <p>Flex布局是一整个模块，其中父元素称为 flex container（Flex 容器）；所有子元素称为 flex item（Flex 项目）；</p>
       <p>Flex布局存在两条概念轴，水平的主轴（main axis）和垂直的交叉轴（cross axis）,默认的主轴方向也是水平的，交叉轴是垂直的；</p>
       <p>主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；</p>
       <p>交叉轴的开始位置叫做cross start，结束位置叫做cross end；</p>
       <p>子元素在主轴方向上的大小称为 main size，在交叉轴方向上的大小称为 cross size。</p>
-    </div> -->
+    </div>
     <div class="container-warp">
       <div id="attr-List" class="attr-list">
         
@@ -215,9 +215,24 @@
         let childArr = data.children;
         let childEle = '';
         for (let i = 0; i < childArr.length; i++) {
-          childEle += `<li data-parent=${data.title} data-value=${childArr[i].title}>${childArr[i].title}</li>`
+          childEle += (
+            `<li class="nav-list" data-parent=${data.title} data-value=${childArr[i].title}>
+              ${childArr[i].title}
+            </li>`
+          );
         }
-        return `<ul class="attr-nav"><h3 data-id=${data.id} data-value=${data.title}>${data.title}</h3>${childEle}</ul>`
+        return (
+          `<div class="nav-warp">
+            <h3 data-id=${data.id} data-value=${data.title}>
+                ${data.title}
+            </h3>
+            <ul class="attr-nav">
+              ${childEle}
+            </ul>
+          </div>
+          `
+          // <span>${data.title}</span>: ${data.desc}
+        );
       },
       itemEles: function itemEles(num) {
         let itemEle = '';
@@ -232,6 +247,11 @@
 
     const flexBoxTool = new FlexBoxTool();
     flexBoxTool.init();
+
+    $('.nav-warp').hover(function () {
+      $(this).find('.attr-nav').slideToggle('slow');
+    })
+    
 
 
 

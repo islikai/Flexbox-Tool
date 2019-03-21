@@ -8,7 +8,7 @@ html, body {
   position: relative;
   background: #f5f6fa;
 }
-
+/* 左侧部分 */
 .info-content {
   position: fixed;
   height: 100%;
@@ -18,8 +18,20 @@ html, body {
   background-color: #12131d;
   top: 0;
   left: 0;
-  color: #eee;
 }
+.info-content h2 {
+  font-size: 28px;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  color: #fff;
+  border-bottom: 1px dashed #fff;
+}
+.info-content p {
+  color: #666;
+  line-height: 28px;
+  margin-bottom: 15px;
+}
+/* 左侧部分结束 */
 .dashed-arrow, .dashed-arrow1 {
   position: relative;
   opacity: .7;
@@ -76,7 +88,7 @@ html, body {
 .box-container {
   width: 600px;
   height: 350px;
-  margin: 200px 200px;
+  margin: 80px 0 0 180px;
   position: relative;
   background-color: #fff;
   box-shadow: 4px 6px 8px #d8d9e0;
@@ -153,12 +165,44 @@ html, body {
 /* 选择属性列表 */
 
 .attr-list {
-
+  height: 100px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 4px 6px 8px #d8d9e0;
+  position: relative;
+  z-index: 110;
 }
-.attr-nav {
-  background-color: red;
-  overflow: hidden;
-}
-.attr-nav .item {
+.nav-warp {
   float: left;
+  display: inline-block;
+  margin-right: 10px;
+}
+.nav-warp h3 {
+  background-color: #23242f;
+  color: #fff;
+  display: block;
+  height: 35px;
+  width: 140px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.attr-nav {
+  width: 140px;
+  background-color: #404256;
+  display: none;
+}
+
+.attr-nav .nav-list {
+  height: 35px;
+  line-height: 35px;
+  padding-left: 5px;
+  cursor: pointer;
+  color: #666;
+}
+.attr-nav .nav-list:hover {
+  background-color: #12131d;
+  color: #fff;
 }
