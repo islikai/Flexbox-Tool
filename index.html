@@ -11,16 +11,46 @@
 <body>
   <div class="main-warp">
     <div class="info-content">
-      <h2>Flexbox 调试工具</h2>
-      <p>Flex布局是一整个模块，其中父元素称为 flex container（Flex 容器）；所有子元素称为 flex item（Flex 项目）；</p>
-      <p>Flex布局存在两条概念轴，水平的主轴（main axis）和垂直的交叉轴（cross axis）,默认的主轴方向也是水平的，交叉轴是垂直的；</p>
-      <p>主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；</p>
-      <p>交叉轴的开始位置叫做cross start，结束位置叫做cross end；</p>
-      <p>子元素在主轴方向上的大小称为 main size，在交叉轴方向上的大小称为 cross size。</p>
+      <div class="left-logo">
+        <h2>Flexbox 在线测试工具🔧</h2>
+        <p>Flexbox（全称 Flexible Box）布局，也叫 Flex 布局，意为“弹性布局”</p>
+      </div>
+      <div class="info-text">
+        <p>Flex布局是一整个模块，父元素称为
+          <span class="code-tip" data-id="1-1">flex container（Flex 容器）</span>；
+          所有子元素称为
+          <span class="code-tip" data-id="1-2">flex item（Flex 项目）</span>；
+        </p>
+        <p>Flex布局存在两条概念轴
+          <br />
+          1. <span class="code-tip" data-id="2-1">主轴（main axis）</span>
+          <br />
+          2. <span class="code-tip" data-id="3-1">交叉轴（cross axis）</span>
+        </p>
+        <p>主轴: 默认是水平方向,从左到右; 开始位置（与边框的交叉点）叫做
+          <span class="code-tip" data-id="2-2">main start</span>，
+          结束位置叫做
+          <span class="code-tip" data-id="2-3">main end</span>；</p>
+        <p>交叉轴: 默认是垂直方向, 从上到下; 开始位置（与边框的交叉点）叫做
+          <span class="code-tip" data-id="3-2">cross start</span>，
+          结束位置叫做
+          <span class="code-tip" data-id="3-3">cross end</span>；
+        </p>
+        <p>子元素在主轴方向上的大小称为
+          <span class="code-tip" data-id="4-1">main size</span>，
+          在交叉轴方向上的大小称为
+          <span class="code-tip" data-id="4-2">cross size</span>。
+        </p>
+      </div>
     </div>
     <div class="container-warp">
-      <div id="attr-List" class="attr-list">
-        
+      <div class="container-top">
+        <ul class="right-nav">
+          <li class="nav-current" data-id="1">容器属性</li>
+          <li data-id="2">项目属性</li>
+        </ul>
+        <div id="attr-warp" class="attr-warp"></div>
+        <div class="item-attr-warp"></div>
       </div>
       <div class="box-container">
         <div class="dashed-arrow main-axis">
@@ -36,12 +66,56 @@
         <div class="main-container">
         </div>
       </div>
+      <div id="desc" class="desc">
+        <span class="code-tag">.container {</span>
+        <div id="code-list-warp"></div>
+        <span class="code-tag">}</span>
+      </div>
+      <div class="item-list-desc"></div>
     </div>
   </div>
   <script crossorigin="anonymous" integrity="sha384-rY/jv8mMhqDabXSo+UCggqKtdmBfd3qC2/KvyTDNQ6PcUJXaxK1tMepoQda4g5vB"
     src="https://lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>
   <script>
-    var navLists = [
+    let itemList = [
+      {
+        id: 0,
+        title: 'order',
+        desc: 'order：定义了项目的排列顺序，默认值为0，数值越小，排列越靠前',
+        code: '.item{order:integer;}'
+      },
+      {
+        id: 1,
+        title: 'flex-grow',
+        desc: 'flex-grow：定义了项目的放大比例，默认为0，也就是即使存在剩余空间，也不会放大',
+        code: '.item{flex-grow:number;}'
+      },
+      {
+        id: 2,
+        title: 'flex-shrink',
+        desc: 'flex-shrink：定义了项目的缩小比例，默认为1(负值对该属性无效)，即当空间不足时，项目会自动缩小;如果所有项目的flex-shrink都为1，当空间不足时，所有项目都将等比缩小；如果其中一个项目的flex-shrink为0，其余都为1，当空间不足时，flex-shrink为0的不缩小。',
+        code: '.item{flex-shrink:number;}'
+      },
+      {
+        id: 3,
+        title: 'flex-basis',
+        desc: 'flex-basis：定义了在分配多余的空间之前，项目占据的主轴空间，默认值为auto，即项目原来的大小。浏览器会根据这个属性来计算主轴是否有多余的空间。',
+        code: '.item{flex-basis:length|auto;}',
+      },
+      {
+        id: 4,
+        title: 'flex',
+        desc: 'flex：属性是flex-grow、flex-shrink、flex-basis的缩写，默认值是(0,1,auto)，后两个属性可选。',
+        code: "",
+      },
+      {
+        id: 5,
+        title: 'align-self',
+        desc: 'align-self：用来定义单个项目与其他项目不一样的对齐方式，可以覆盖align-items属性。默认属性值是auto，即继承父元素的align-items属性值。当没有父元素时，它的表现等同于stretch。',
+        code: '.item{align-self:auto|flex-start|flex-end|center|baseline|stretch;}'
+      }
+    ];
+    let navLists = [
       {
         id: 0,
         title: 'flex-direction',
@@ -131,7 +205,7 @@
           {
             id: 1,
             title: 'stretch',
-            desc: '如果项目未设置高度或者为 auto，项目将占满整个容器的高度（默认值）',
+            desc: '如果项目未设置高度或者为auto，项目将占满整个容器的高度（默认值）',
           },
           {
             id: 2,
@@ -163,7 +237,7 @@
           {
             id: 1,
             title: 'stretch',
-            desc: '如果项目未设置高度或者为 auto，项目将占满整个容器的高度（默认值）',
+            desc: '如果项目未设置高度或者为auto，项目将占满整个容器的高度（默认值）',
           },
           {
             id: 2,
@@ -196,27 +270,44 @@
 
     function FlexBoxTool() {
       this.attrListEle = '';
-      this.attrId = $('.attr-list');
-      this.containerId = $('.main-container');
+      this.attrWarp = $('.attr-warp');
+      this.descWarp = $('.desc');
+      this.containerEle = $('.main-container');
+      this.codeWarp = $('#code-list-warp');
+      this.boxContainer = $('.box-container');
+      this.styleObj = {};
+      this.descInfo = {};
     }
     FlexBoxTool.prototype = {
       init: function init() {
         this.attrEle();
         this.itemEles(3);
+        this.itemHoverHandle();
+        this.targetHandle();
+        this.addHoverTitle();
+        this.titleHandle();
+        this.navHandel();
       },
       attrEle: function attrEle() {
         for (let i = 0; i < navLists.length; i++) {
           this.attrListEle += this.childAttrEle(navLists[i]);
         }
-        this.attrId.empty();
-        this.attrId.append(this.attrListEle);
+        this.attrWarp.empty();
+        this.attrWarp.append(this.attrListEle);
       },
       childAttrEle: function childAttrEle(data) {
         let childArr = data.children;
         let childEle = '';
         for (let i = 0; i < childArr.length; i++) {
           childEle += (
-            `<li class="nav-list" data-parent=${data.title} data-value=${childArr[i].title}>
+            `<li
+              class="attr-list-item"
+              data-parent-value=${data.title}
+              data-parent-id=${data.id}
+              data-parent-desc=${data.desc}
+              data-value=${childArr[i].title}
+              data-desc=${childArr[i].desc}
+            >
               ${childArr[i].title}
             </li>`
           );
@@ -226,7 +317,7 @@
             <h3 data-id=${data.id} data-value=${data.title}>
                 ${data.title}
             </h3>
-            <ul class="attr-nav">
+            <ul class="attr-list">
               ${childEle}
             </ul>
           </div>
@@ -237,25 +328,236 @@
       itemEles: function itemEles(num) {
         let itemEle = '';
         for (let i = 0; i < num; i++) {
-          itemEle += `<div class="item">${i + 1}</div>`;
+          itemEle += `
+          <div class="item">
+            <span>${i + 1}</span>
+            <div class="item-code-text"></div>
+          </div>`;
         }
-        this.containerId.empty();
-        this.containerId.append(itemEle);
+        this.containerEle.empty();
+        this.containerEle.append(itemEle);
+      },
+      itemHoverHandle: function () {
+        $('.nav-warp').hover(function () {
+          $(this).find('.attr-list').slideToggle();
+        })
+      },
+      targetHandle: function () {
+        let that = this;
+        $('.attr-list').click(function (event) {
+          var $target = $(event.target);
+          if ($target.is('.attr-list-item')) {
+            $target.siblings('.attr-list-item').removeClass('attr-list-item-current');
+            $target.addClass('attr-list-item-current');
+
+            let parentId = $target.data('parentId')
+            let parentValue = $target.data('parentValue');
+            let value = $target.data('value');
+
+            if (parentId === 1 || parentId === 4) {
+              that.itemEles(6);
+            }
+            const params = {
+              parentDesc: $target.data('parentDesc'),
+              desc: $target.data('desc'),
+              value: value,
+            }
+            // 设置css样式
+            that.setStyle(parentValue, value, params);
+          }
+        })
+      },
+      setStyle: function (k, v, params) {
+        /*
+          0: 'flex-direction'
+          1: 'flex-wrap'
+          2: 'justify-content'
+          3: 'align-items'
+          4: 'align-content'
+        */
+        this.styleObj[k] = v;
+        this.descInfo[k] = params;
+        this.containerEle.css(this.styleObj);
+        this.setCode(); // 设置显示代码
+      },
+      setCode: function () {
+        
+        let codeEle = '';
+        $.each(this.descInfo, function (i, n) {
+          codeEle += `
+            <div class="code-list">
+              <i class="code-item code-comment">// ${n.parentDesc}</i>
+              <p class="code-item">
+                ${i}: 
+                <i class="code-v">${n.value}</i>
+                <i class="code-comment">// ${n.desc}</i>
+              </p>
+            </div>
+          `
+        })
+        this.codeWarp.empty();
+        this.codeWarp.append(codeEle);
+        // this.desc.text(JSON.stringify(this.styleObj));
+      },
+      addHoverTitle: function () {
+        $('.code-tip').attr('title', '查看右侧图')
+      },
+      titleHandle: function () {
+        const that = this;
+        $('.code-tip').hover(function (event) {
+          let $target = $(event.target);
+          switch ($target.data('id')) {
+            case '1-1':
+              that.boxContainer.css('background-color', '#ffebcf')
+              break;
+            case '1-2':
+              $('.item').css('background-color', '#9acdff')
+              break;
+            case '2-1':
+            case '2-2':
+            case '2-3':
+              $('.main-axis').css('display', 'block');
+              break;
+            case '3-1':
+            case '3-2':
+            case '3-3':
+              $('.cross-axis').css('display', 'block');
+              break;
+            case '4-1':
+              $('.item').addClass('item-main-axis');
+              break;
+            case '4-2':
+              $('.item').addClass('item-cross-axis');
+              break;
+            default:
+              break;
+          }
+        }, function (event) {
+          let $target = $(event.target);
+          switch ($target.data('id')) {
+              case '1-1':
+                that.boxContainer.css('background-color', '#fff')
+                break;
+              case '1-2':
+                $('.item').css('background-color', '#cfe8ff')
+                break;
+              case '2-1':
+              case '2-2':
+              case '2-3':
+                $('.main-axis').css('display', 'none');
+                break;
+              case '3-1':
+              case '3-2':
+              case '3-3':
+                $('.cross-axis').css('display', 'none');
+                break;
+              case '4-1':
+                $('.item').removeClass('item-main-axis');
+                break;
+              case '4-2':
+                $('.item').removeClass('item-cross-axis');
+                break;
+              default:
+                break;
+            }
+        })
+      },
+      navHandel: function () {
+        let that = this;
+        $('.right-nav').click(function (event) {
+          let $target = $(event.target);
+          let id = $target.data('id');
+          $target.siblings('li').removeClass('nav-current');
+          $target.addClass('nav-current');
+          if (id === 2) {
+            that.attrWarp.hide();
+            that.descWarp.hide();
+            $('.item-attr-warp, .item-list-desc').show();
+            $('.item-attr-warp').empty();
+            let navEle = '';
+            for (let i = 0; i < itemList.length; i++) {
+              navEle += `<span
+                data-id=${itemList[i].id}
+                data-value=${itemList[i].title}
+                data-desc=${itemList[i].desc}
+                data-code=${itemList[i].code}
+              >
+                ${itemList[i].title}
+              </span>`;
+            }
+            $('.item-attr-warp').append(navEle);
+            let firstEle = $('.item-attr-warp').find('span')[0]
+            $(firstEle).addClass('current');
+            // 渲染子元素解释内容
+            $('.item-list-desc').text(itemList[0].code + ' ' + itemList[0].desc);
+            that.navChangeHandel();
+            that.changeItemEleStyle('order', 0);
+          } else {
+            that.attrWarp.show();
+            that.descWarp.show();
+            // hide
+            $('.item-attr-warp, .item-list-desc').hide();
+          }
+        })
+      },
+      navChangeHandel: function () {
+        let that = this;
+        $('.item-attr-warp').click(function (event) {
+          let $target = $(event.target);
+          $target.siblings().removeClass('current');
+          $target.addClass('current');
+          $('.item-list-desc').text($target.data('code') + ' ' + $target.data('desc'));
+          that.changeItemEleStyle($target.data('value'), $target.data('id'));
+        })
+      },
+      changeItemEleStyle: function (k, id) {
+        let obj = { [k]: 0 }
+        if (id === 2) {
+          this.itemEles(7);
+        } else {
+          this.itemEles(4);
+        }
+        let itemEle = this.containerEle.find('.item');
+        for (let i = 0; i < itemEle.length; i++) {
+          $(itemEle[i]).removeAttr("style");
+        }
+        if (id === 0) {
+          obj[k] = -2;
+          $(itemEle[2]).css(obj)  
+          $(itemEle[2]).find('.item-code-text').text(JSON.stringify(obj));
+        } else if (id === 1) {
+          obj[k] = 1;
+          for (let i = 0; i < itemEle.length; i++) {
+            $(itemEle[i]).removeAttr("style");
+            $(itemEle[i]).css(obj);
+            $(itemEle[i]).find('.item-code-text').text(JSON.stringify(obj));
+          }
+        } else if (id === 2) {
+          obj[k] = 0;
+          $(itemEle[2]).css(obj)
+          $(itemEle[2]).find('.item-code-text').text(JSON.stringify(obj));
+        } else if (id === 3) {
+          obj[k] = '180px';
+          $(itemEle[2]).css(obj)
+          $(itemEle[2]).find('.item-code-text').text(JSON.stringify(obj));
+        } else if (id === 4) {
+          obj[k] = '0 1 auto';
+          for (let i = 0; i < itemEle.length; i++) {
+            $(itemEle[i]).removeAttr("style");
+            $(itemEle[i]).css(obj);
+            $(itemEle[i]).find('.item-code-text').text(JSON.stringify(obj));
+          }
+        } else if (id === 5) {
+          obj[k] = 'flex-end';
+          $(itemEle[2]).css(obj)
+          $(itemEle[2]).find('.item-code-text').text(JSON.stringify(obj));
+        }
       }
     }
 
 
     const flexBoxTool = new FlexBoxTool();
     flexBoxTool.init();
-
-    $('.nav-warp').hover(function () {
-      $(this).find('.attr-nav').slideToggle('slow');
-    })
-    
-
-
-
-
 
   </script>
 </body>
